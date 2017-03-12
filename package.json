@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Rendering of the hilbert curve",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "deploy": "source ./deploy.sh"
   },
   "author": "Jonathan Potter",
   "license": "MIT",
