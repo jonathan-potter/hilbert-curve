@@ -3,6 +3,7 @@
 /* HEADER */
 .page-header {
   flex-basis: 60px;
+  flex-shrink: 0;
   background-color: white;
   border-bottom: 1px solid #aaa;
   text-align: left;
