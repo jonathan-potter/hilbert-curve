@@ -1,5 +1,6 @@
 import DrawingVector from 'classes/DrawingVector'
 
+import 'css/header.scss'
 import 'css/app.scss'
 
 const { abs, sqrt } = Math
