@@ -6,6 +6,9 @@ import 'css/app.scss'
 const { abs, sqrt } = Math
 const { requestAnimationFrame } = window
 
+const ORDER = 6
+const STEPS = 4
+
 function nextOrder (curve, order) {
   let newCurve = curve.concat(curve)
 
@@ -54,12 +57,9 @@ function isOdd (number) {
 }
 
 let curve = ['S', 'R', 'R', 'S']
-curve = nextOrder(curve, 2)
-curve = nextOrder(curve, 3)
-curve = nextOrder(curve, 4)
-// curve = nextOrder(curve, 5)
-// curve = nextOrder(curve, 6)
-// curve = nextOrder(curve, 7)
+for (let order = 2; order <= ORDER; order++) {
+  curve = nextOrder(curve, order)
+}
 
 const length = (1 / sqrt(curve.length)) * 500
 const start = { x: length / 2, y: length / 2 }
@@ -77,12 +77,16 @@ const drawingVector = curve[1] === 'R'
 
 curve.shift()
 function draw () {
-  const turn = curve.shift()
+  for (let step = 0; step < STEPS; step++) {
+    const turn = curve.shift()
 
-  if (turn) {
-    drawingVector.draw()
-    drawingVector.rotate(turn)
+    if (turn) {
+      drawingVector.draw()
+      drawingVector.rotate(turn)
+    }
+  }
 
+  if (curve.length) {
     requestAnimationFrame(draw)
   }
 }
