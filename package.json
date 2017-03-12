@@ -1,5 +1,5 @@
 {
-  "name": "hilbert curve",
+  "name": "hilbert-curve",
   "version": "0.0.1",
   "description": "Rendering of the hilbert curve",
   "scripts": {

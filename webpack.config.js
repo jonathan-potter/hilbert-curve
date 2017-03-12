@@ -13,8 +13,9 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       /* eslint-disable key-spacing */
-      css: path.resolve(__dirname, 'css'),
-      javascript: path.resolve(__dirname, 'javascript')
+      css:        path.resolve(__dirname, 'css'),
+      javascript: path.resolve(__dirname, 'javascript'),
+      classes:    path.resolve(__dirname, 'javascript', 'classes')
       /* eslint-enable key-spacing */
     }
   },
@@ -42,8 +43,8 @@ module.exports = {
       filename: 'build/style.css',
       allChunks: true
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true
-    })
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true
+    // })
   ]
 }
