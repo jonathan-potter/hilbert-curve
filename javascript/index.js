@@ -11,12 +11,14 @@ const ORDER = 6
 const STEPS = 4
 
 const curve = turnsForOrder(ORDER)
+const pixelsPerEdge = (1 / sqrt(curve.length)) * 500
+const drawingVector = new DrawingVector({
+  direction: { x: 1, y: 0 },
+  position: { x: pixelsPerEdge / 2, y: pixelsPerEdge / 2 },
+  length: pixelsPerEdge
+})
 
-const length = (1 / sqrt(curve.length)) * 500
-const start = { x: length / 2, y: length / 2 }
-const drawingVector = curve[1] === 'R'
-  ? new DrawingVector({ direction: { x: 0, y: 1 }, position: start, length })
-  : new DrawingVector({ direction: { x: 1, y: 0 }, position: start, length })
+if (curve[1] === 'R') { drawingVector.rotate('L') }
 
 curve.shift()
 function draw () {
