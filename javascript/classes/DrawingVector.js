@@ -14,7 +14,7 @@ export default class DrawingVector {
 
   draw () {
     context.lineWidth = 2
-    context.strokeStyle = 'black'
+    context.strokeStyle = 'white'
     context.beginPath()
 
     const { x, y } = this.position
