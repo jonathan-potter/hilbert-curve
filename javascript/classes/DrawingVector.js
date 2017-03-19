@@ -5,10 +5,10 @@ const { PI: pi } = Math
 const canvas = document.getElementsByTagName('canvas')[0]
 const context = canvas.getContext('2d')
 
-let dashOffset = 0
-const DASH_SPEED = 1
-context.setLineDash([100, 5])
-const MAX_OFFSET = 105
+let dashOffset = 10
+const DASH_SPEED = 3
+context.setLineDash([100, 10])
+const MAX_OFFSET = 110
 
 export default class DrawingVector {
   constructor ({ direction, position, length }) {
@@ -18,8 +18,8 @@ export default class DrawingVector {
   }
 
   startDraw () {
-    dashOffset = (dashOffset - DASH_SPEED) % MAX_OFFSET
-    context.lineDashOffset = dashOffset
+    dashOffset = (dashOffset + DASH_SPEED) % MAX_OFFSET
+    context.lineDashOffset = -dashOffset
 
     context.lineWidth = 2
     context.strokeStyle = 'white'
@@ -29,8 +29,12 @@ export default class DrawingVector {
   }
 
   draw () {
+    this.drawPartial(1)
+  }
+
+  drawPartial (portion) {
     const { x, y } = this.position
-    const { x: dx, y: dy } = scalarMultiply(this.direction, this.length)
+    const { x: dx, y: dy } = scalarMultiply(this.direction, this.length * portion)
     context.lineTo(x + dx, y + dy)
 
     this.position = { x: x + dx, y: y + dy }

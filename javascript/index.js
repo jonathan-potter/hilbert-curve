@@ -7,14 +7,15 @@ import 'css/app.scss'
 const { min, sqrt } = Math
 const { requestAnimationFrame } = window
 
-const ORDER = 6
-const STEPS = 4
+const ORDER = 4
+const PIXELS = 3
 
 const curve = turnsForOrder(ORDER)
 const pixelsPerEdge = (1 / sqrt(curve.length)) * 500
 
 curve.shift()
-let steps = 0
+let position = 0
+const goalPosition = curve.length * pixelsPerEdge
 function draw () {
   const drawingVector = new DrawingVector({
     direction: { x: 1, y: 0 },
@@ -24,10 +25,10 @@ function draw () {
   if (curve[1] === 'R') { drawingVector.rotate('L') }
   drawingVector.clearScreen()
 
-  steps = min(steps + STEPS, curve.length)
+  position = min(position + PIXELS, goalPosition)
 
   drawingVector.startDraw()
-  for (let step = 0; step < steps; step++) {
+  for (let step = 0; step < position / pixelsPerEdge; step++) {
     const turn = curve[step]
 
     if (turn) {
@@ -35,6 +36,8 @@ function draw () {
       drawingVector.rotate(turn)
     }
   }
+  drawingVector.drawPartial((position % pixelsPerEdge) / pixelsPerEdge)
+
   drawingVector.endDraw()
 
   requestAnimationFrame(draw)
